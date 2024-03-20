@@ -1,8 +1,32 @@
+from typing import Any
+
 import numpy as np
 
 from scenario_gym.state import State
 
 from .base import Metric
+
+
+class EgoSpeedHistory(Metric):
+    """Record speed history of the ego."""
+
+    name = "ego_speed_history"
+
+    def _reset(self, state: State) -> None:
+        """Reset speed history."""
+        self.ego = state.scenario.ego
+        self.ego_speed_history = [np.linalg.norm(state.velocities[self.ego][:3])]
+        self.t_history = [0.0]
+
+    def _step(self, state: State) -> None:
+        """Append new speed and time."""
+        speed = np.linalg.norm(state.velocities[self.ego][:3])
+        self.ego_speed_history.append(speed)
+        self.t_history.append(state.t)
+
+    def get_state(self) -> np.ndarray:
+        """Return speed history"""
+        return np.array([self.t_history, self.ego_speed_history])
 
 
 class EgoAvgSpeed(Metric):
