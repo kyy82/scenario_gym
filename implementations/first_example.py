@@ -1,7 +1,7 @@
 import numpy as np
 from scenario_gym import ScenarioGym
 from scenario_gym.xosc_interface import import_scenario
-from scenario_gym.metrics import EgoSpeedHistory
+from scenario_gym.metrics import EgoSpeedAccelerationHistory
 import os
 from key_performance_indicators import vehicle_specific_power
 import matplotlib.pyplot as plt
@@ -14,11 +14,11 @@ scenario = import_scenario(file_path)
 plt.figure(1)
 scenario.plot()
 
-gym = ScenarioGym(metrics=[EgoSpeedHistory()])
+gym = ScenarioGym(metrics=[EgoSpeedAccelerationHistory()])
 gym.load_scenario(file_path)
 gym.rollout()
 
-speed_and_acceleration = gym.get_metrics()['ego_speed_history']
+speed_and_acceleration = gym.get_metrics()['ego_speed_acceleration_history']
 vsp, _ = vehicle_specific_power(speed_and_acceleration)
 
 plt.figure(2)

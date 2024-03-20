@@ -7,10 +7,10 @@ from scenario_gym.state import State
 from .base import Metric
 
 
-class EgoSpeedHistory(Metric):
+class EgoSpeedAccelerationHistory(Metric):
     """Record speed history of the ego."""
 
-    name = "ego_speed_history"
+    name = "ego_speed_acceleration_history"
 
     def _reset(self, state: State) -> None:
         """Reset speed history."""
