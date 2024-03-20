@@ -17,16 +17,19 @@ class EgoSpeedHistory(Metric):
         self.ego = state.scenario.ego
         self.ego_speed_history = [np.linalg.norm(state.velocities[self.ego][:3])]
         self.t_history = [0.0]
+        self.ego_acceleration_history = []
 
     def _step(self, state: State) -> None:
         """Append new speed and time."""
         speed = np.linalg.norm(state.velocities[self.ego][:3])
+        self.ego_acceleration_history.append((speed - self.ego_speed_history[-1]) / state.dt)
         self.ego_speed_history.append(speed)
         self.t_history.append(state.t)
 
     def get_state(self) -> np.ndarray:
         """Return speed history"""
-        return np.array([self.t_history, self.ego_speed_history])
+        self.ego_acceleration_history.append(0.0)
+        return np.array([self.t_history, self.ego_speed_history, self.ego_acceleration_history])
 
 
 class EgoAvgSpeed(Metric):
