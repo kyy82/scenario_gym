@@ -1,5 +1,4 @@
 import numpy as np
-
 from scenario_gym import ScenarioGym
 from scenario_gym.xosc_interface import import_scenario
 from scenario_gym.metrics import EgoSpeedHistory
@@ -37,7 +36,7 @@ ax2 = ax1.twinx()
 
 # Plot VSP on the right y-axis
 color = 'tab:blue'
-ax2.set_ylabel('VSP (kw/tonne)', color=color)
+ax2.set_ylabel('Acceleration (m/s^-2)', color=color)
 ax2.plot(speed_and_acceleration[0, :], speed_and_acceleration[2,:], label='Acceleration (m/s^-2)', color=color)
 ax2.tick_params(axis='y', labelcolor=color)
 
@@ -56,7 +55,7 @@ ax1.legend(handles, labels, loc='upper left')
 plt.show()
 
 plt.figure(3)
-plt.plot(speed_and_acceleration[0,:], vsp)
+plt.plot(speed_and_acceleration[0,:], vsp, color='green')
 plt.xlabel('Time (s)')
 plt.ylabel('VSP (kW/tonne)')
 plt.show()
