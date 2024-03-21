@@ -8,12 +8,12 @@ import matplotlib.pyplot as plt
 
 current_path = os.path.dirname(os.path.abspath(__file__))
 scenario_name = 'd9726503-e04a-4e8b-b487-8805ef790c93.xosc'
-file_path = os.path.join(current_path, '..', 'tests', 'input_files', 'Scenarios', scenario_name)
+file_path = os.path.join(current_path,'..', '..', 'tests', 'input_files', 'Scenarios', scenario_name)
 
 scenario = import_scenario(file_path)
 plt.figure(1)
 scenario.plot()
-plt.savefig('scenario.png', dpi=600)
+# plt.savefig('scenario.png', dpi=600)
 
 gym = ScenarioGym(metrics=[EgoSpeedAccelerationHistory()])
 gym.load_scenario(file_path)
@@ -53,7 +53,7 @@ labels = labels1 + labels2
 ax1.legend(handles, labels, loc='upper left')
 
 # Show the plot
-plt.savefig('speed_acceleration.png', dpi=600)
+# plt.savefig('speed_acceleration.png', dpi=600)
 plt.show()
 
 
@@ -61,7 +61,7 @@ plt.figure(3)
 plt.plot(speed_and_acceleration[0,:], vsp, color='green')
 plt.xlabel('Time (s)')
 plt.ylabel('VSP (kW/tonne)')
-plt.savefig('vsp.png', dpi=600)
+# plt.savefig('vsp.png', dpi=600)
 plt.show()
 
 
