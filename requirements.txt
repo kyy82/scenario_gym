@@ -1,0 +1,47 @@
+certifi @ file:///home/conda/feedstock_root/build_artifacts/certifi_1707022139797/work/certifi
+contourpy @ file:///Users/runner/miniforge3/conda-bld/contourpy_1695554308980/work
+cycler @ file:///home/conda/feedstock_root/build_artifacts/cycler_1696677705766/work
+elementpath @ file:///home/conda/feedstock_root/build_artifacts/elementpath_1690322208768/work
+filelock @ file:///home/conda/feedstock_root/build_artifacts/filelock_1698714947081/work
+fonttools @ file:///Users/runner/miniforge3/conda-bld/fonttools_1696601219319/work
+fsspec @ file:///home/conda/feedstock_root/build_artifacts/fsspec_1710808267764/work
+gmpy2 @ file:///Users/runner/miniforge3/conda-bld/gmpy2_1666808859877/work
+Jinja2==3.1.3
+joblib @ file:///home/conda/feedstock_root/build_artifacts/joblib_1691577114857/work
+kiwisolver @ file:///Users/runner/miniforge3/conda-bld/kiwisolver_1695380028307/work
+lxml @ file:///private/var/folders/c_/qfmhj66j0tn016nkx_th4hxm0000gp/T/abs_88h1jismwb/croot/lxml_1695058176726/work
+markdown-it-py @ file:///home/conda/feedstock_root/build_artifacts/markdown-it-py_1686175045316/work
+MarkupSafe==2.1.5
+matplotlib @ file:///Users/runner/miniforge3/conda-bld/matplotlib-suite_1697011224951/work
+mdurl @ file:///home/conda/feedstock_root/build_artifacts/mdurl_1704317613764/work
+mpmath @ file:///home/conda/feedstock_root/build_artifacts/mpmath_1678228039184/work
+munkres==1.1.4
+networkx @ file:///home/conda/feedstock_root/build_artifacts/networkx_1698504735452/work
+numpy @ file:///Users/runner/miniforge3/conda-bld/numpy_1707225538192/work/dist/numpy-1.26.4-cp310-cp310-macosx_10_9_x86_64.whl#sha256=d544e550b9582a12a12839ddf251b97a80a022b3d4c11cede2fb4bd206b16856
+opencv-python==4.9.0.80
+packaging @ file:///home/conda/feedstock_root/build_artifacts/packaging_1710075952259/work
+Pillow @ file:///Users/runner/miniforge3/conda-bld/pillow_1697423684222/work
+pyaml @ file:///home/conda/feedstock_root/build_artifacts/pyaml_1696003551160/work
+pybind11 @ file:///Users/runner/miniforge3/conda-bld/pybind11-split_1695367067660/work
+pybind11-global @ file:///Users/runner/miniforge3/conda-bld/pybind11-split_1695367067660/work
+pyclothoids==0.1.5
+Pygments @ file:///home/conda/feedstock_root/build_artifacts/pygments_1700607939962/work
+pyparsing @ file:///home/conda/feedstock_root/build_artifacts/pyparsing_1690737849915/work
+python-dateutil @ file:///home/conda/feedstock_root/build_artifacts/python-dateutil_1709299778482/work
+pyxodr==0.1.3
+PyYAML @ file:///Users/runner/miniforge3/conda-bld/pyyaml_1695373675063/work
+rich @ file:///home/conda/feedstock_root/build_artifacts/rich-split_1696096668362/work/dist
+-e git+https://github.com/kyy82/scenario_gym.git@f18972e595ff913f1eb361db52d272ddb725e724#egg=scenario_gym
+scenariogeneration==0.14.3
+scikit-learn @ file:///Users/runner/miniforge3/conda-bld/scikit-learn_1701932089485/work
+scikit-optimize @ file:///home/conda/feedstock_root/build_artifacts/scikit-optimize_1639544373814/work
+scipy @ file:///Users/runner/miniforge3/conda-bld/scipy-split_1696467669294/work/dist/scipy-1.11.3-cp310-cp310-macosx_10_9_x86_64.whl#sha256=1fd63600e50ac857e2485e8ea8a96f143f06165ffc2be7402e2cfa7498ea0f72
+shapely @ file:///Users/runner/miniforge3/conda-bld/shapely_1700762930721/work
+six @ file:///home/conda/feedstock_root/build_artifacts/six_1620240208055/work
+sympy @ file:///home/conda/feedstock_root/build_artifacts/sympy_1684180540116/work
+threadpoolctl @ file:///home/conda/feedstock_root/build_artifacts/threadpoolctl_1689261241048/work
+torch==2.2.1
+tornado @ file:///Users/runner/miniforge3/conda-bld/tornado_1708363149648/work
+typing_extensions @ file:///home/conda/feedstock_root/build_artifacts/typing_extensions_1708904622550/work
+unicodedata2 @ file:///Users/runner/miniforge3/conda-bld/unicodedata2_1695848189757/work
+xmlschema==2.5.1
