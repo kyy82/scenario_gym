@@ -8,7 +8,7 @@ from .base import Metric
 
 
 class EgoSpeedAccelerationHistory(Metric):
-    """Record speed history of the ego."""
+    """Record speed and acceleration history of the ego."""
 
     name = "ego_speed_acceleration_history"
 
