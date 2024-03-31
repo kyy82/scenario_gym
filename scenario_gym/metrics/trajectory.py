@@ -16,39 +16,48 @@ class AllHistory(Metric):
         self.vehicles = set(state.scenario.vehicles)
         self.speed_history = {vehicle: [] for vehicle in self.vehicles}
         self.acceleration_history = {vehicle: [] for vehicle in self.vehicles}
-        self.last_velocity = {vehicle: state.velocities[vehicle][:3] if vehicle in state.velocities else None for
-                              vehicle in self.vehicles}
-        self.dt_history = []
+        self.last_speed = {vehicle: np.linalg.norm(state.velocities[vehicle][:3]) if vehicle in state.velocities.keys() else None for vehicle in self.vehicles}
+        self.t_history = []
 
     def _step(self, state: State) -> None:
-        """Record speed and acceleration of each agent"""
-        for vehicle in state.scenario.vehicles:
-            current_velocity = state.velocities[vehicle][:3] if vehicle in state.velocities else np.zeros(3)
-            previous_velocity = self.last_velocity.get(vehicle, None)
+        """Record speed and acceleration of each vehicle"""
 
-            speed = np.linalg.norm(current_velocity)
+        current_vehicles = set(state.velocities.keys())
+        unprocessed_vehicles = self.vehicles - current_vehicles
+
+        for vehicle in current_vehicles:
+            speed = np.linalg.norm(state.velocities[vehicle][:3])
+            previous_speed = self.last_speed.get(vehicle, None)
+
             # default acceleration to 0 if a vehicle just appeared in the scenario
-            if previous_velocity is not None:
-                acceleration = np.linalg.norm(current_velocity - previous_velocity) / max(state.dt, 1e-5)
+            if previous_speed is not None:
+                acceleration = (speed - previous_speed) / state.dt
             else:
                 acceleration = 0
 
             self.speed_history.setdefault(vehicle, []).append(speed)
             self.acceleration_history.setdefault(vehicle, []).append(acceleration)
 
-            self.last_velocity[vehicle] = current_velocity
+            self.last_speed[vehicle] = speed
+            if vehicle in unprocessed_vehicles:
+                unprocessed_vehicles.remove(vehicle)
 
-        # for vehicles in the scenario but not in the current time step, set speed and acceleration to 0
-        for vehicle in self.vehicles:
-            if vehicle not in state.velocities.keys():
-                self.speed_history.setdefault(vehicle, []).append(0)
-                self.acceleration_history.setdefault(vehicle, []).append(0)
+        # for vehicles in the scenario but not in the current time step, set speed and acceleration to None
+        for vehicle in unprocessed_vehicles:
+            self.speed_history.setdefault(vehicle, []).append(None)
+            self.acceleration_history.setdefault(vehicle, []).append(None)
 
-        self.dt_history.append(state.dt)
+        self.t_history.append(state.t)
 
     def get_state(self) -> Any:
-        # return self.velocities, self.vehicles
-        return self.speed_history, self.acceleration_history, self.dt_history
+        # print("Expected time steps:", len(self.t_history))
+        #
+        # for vehicle in self.vehicles:
+        #     print(
+        #         f"Vehicle {vehicle}:
+        #         Speed Entries: {len(self.speed_history[vehicle])},
+        #         Acceleration Entries: {len(self.acceleration_history[vehicle])}")
+        return self.speed_history, self.acceleration_history, self.t_history
 
 
 class EgoSpeedAccelerationHistory(Metric):
