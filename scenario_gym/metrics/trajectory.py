@@ -7,6 +7,50 @@ from scenario_gym.state import State
 from .base import Metric
 
 
+class AllHistory(Metric):
+    """Record speed and acceleration history of all agents."""
+    name = "all_history"
+
+    def _reset(self, state: State) -> None:
+        """Reset history"""
+        self.vehicles = set(state.scenario.vehicles)
+        self.speed_history = {vehicle: [] for vehicle in self.vehicles}
+        self.acceleration_history = {vehicle: [] for vehicle in self.vehicles}
+        self.last_velocity = {vehicle: state.velocities[vehicle][:3] if vehicle in state.velocities else None for
+                              vehicle in self.vehicles}
+        self.dt_history = []
+
+    def _step(self, state: State) -> None:
+        """Record speed and acceleration of each agent"""
+        for vehicle in state.scenario.vehicles:
+            current_velocity = state.velocities[vehicle][:3] if vehicle in state.velocities else np.zeros(3)
+            previous_velocity = self.last_velocity.get(vehicle, None)
+
+            speed = np.linalg.norm(current_velocity)
+            # default acceleration to 0 if a vehicle just appeared in the scenario
+            if previous_velocity is not None:
+                acceleration = np.linalg.norm(current_velocity - previous_velocity) / max(state.dt, 1e-5)
+            else:
+                acceleration = 0
+
+            self.speed_history.setdefault(vehicle, []).append(speed)
+            self.acceleration_history.setdefault(vehicle, []).append(acceleration)
+
+            self.last_velocity[vehicle] = current_velocity
+
+        # for vehicles in the scenario but not in the current time step, set speed and acceleration to 0
+        for vehicle in self.vehicles:
+            if vehicle not in state.velocities.keys():
+                self.speed_history.setdefault(vehicle, []).append(0)
+                self.acceleration_history.setdefault(vehicle, []).append(0)
+
+        self.dt_history.append(state.dt)
+
+    def get_state(self) -> Any:
+        # return self.velocities, self.vehicles
+        return self.speed_history, self.acceleration_history, self.dt_history
+
+
 class EgoSpeedAccelerationHistory(Metric):
     """Record speed and acceleration history of the ego."""
 

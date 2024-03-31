@@ -1,14 +1,14 @@
 import numpy as np
 from scenario_gym import ScenarioGym
 from scenario_gym.xosc_interface import import_scenario
-from scenario_gym.metrics import EgoSpeedAccelerationHistory
+from scenario_gym.metrics import EgoSpeedAccelerationHistory, AllHistory
 import os
 from key_performance_indicators import vehicle_specific_power
 import matplotlib.pyplot as plt
 
 current_path = os.path.dirname(os.path.abspath(__file__))
 scenario_name = 'd9726503-e04a-4e8b-b487-8805ef790c93.xosc'
-file_path = os.path.join(current_path, '..', 'tests', 'input_files', 'Scenarios', scenario_name)
+file_path = os.path.join(current_path, '../..', 'tests', 'input_files', 'Scenarios', scenario_name)
 
 scenario = import_scenario(file_path)
 plt.figure(1)
