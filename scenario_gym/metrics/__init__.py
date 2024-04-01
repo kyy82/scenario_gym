@@ -6,4 +6,8 @@ from scenario_gym.metrics.trajectory import (
     EgoDistanceTravelled,
     EgoMaxSpeed,
 )
-from scenario_gym.metrics.intersection import EgoSpeedAccelerationHistory, AllHistory
+from scenario_gym.metrics.intersection import (
+    EgoSpeedAccelerationHistory,
+    AllHistory,
+    Delay,
+)

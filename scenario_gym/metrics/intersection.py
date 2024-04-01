@@ -7,6 +7,34 @@ from scenario_gym.state import State
 from .base import Metric
 
 
+class Delay(Metric):
+    """Record total delay of all vehicles in the scenario"""
+
+    def __init__(self, name="delay"):
+        super().__init__(name)
+        self.max_speed = 20
+
+    def _reset(self, state: State) -> None:
+        self.vehicles = set(state.scenario.vehicles)
+        self.delay = {vehicle: 0.0 for vehicle in self.vehicles}
+        self.distances = None
+        self.ego = state.scenario.ego
+        self.prev_dist = 0.0
+
+    def _step(self, state: State) -> None:
+        dist = state.distances[self.ego]
+        t = state.t
+        if dist > 1e-6 and dist - self.prev_dist > 1e-6:
+            self.delay = t - dist/self.max_speed
+        self.prev_dist = dist
+
+    def get_state(self) -> Any:
+        return self.delay
+
+    def set_max_speed(self, speed: float) -> None:
+        self.max_speed = speed
+
+
 class AllHistory(Metric):
     """Record speed and acceleration history of all agents."""
     name = "all_history"
